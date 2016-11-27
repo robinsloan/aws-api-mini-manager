@@ -6,24 +6,23 @@ require "archieml"
 require "aws-sdk"
 
 opts = Slop.parse do |args|
-  args.string "-a", "--config", "Config filename, if not aws_config.aml", default: "aws_config.aml"
-  args.bool "-l", "--list", "Flag to list all current keys and exit immediately", default: false
+  args.bool "-l", "--list", "List all keys and exit", default: false
+  args.separator ""
   args.bool "-g", "--generate", "Generate a new key", default: false
   args.string "-n", "--name", "Name of new API key holder"
   args.string "-m", "--memo", "Memo (probably email)"
+  args.separator ""
+  args.string "-k", "--key", "API key to be disabled or deleted"
   args.bool "-d", "--disable", "Disable the specified key", default: false
   args.bool "-x", "--delete", "Delete the specified key", default: false
-  args.string "-k", "--key", "API key to be disabled or deleted"
-  args.on "--help" do
-    puts args
-    exit
-  end
+  args.separator ""
+  args.string "-a", "--config", "Config filename, if not aws_config.aml", default: "aws_config.aml"
 end
 
 puts ""
 
-if not ( opts[:list] || opts[:generate] || opts[:disable] || opts[:delete])
-  puts "Use the --help flag to see the available options. Exiting."
+if not (opts[:list] || opts[:generate] || opts[:disable] || opts[:delete])
+  puts opts
   puts ""
   exit
 end
