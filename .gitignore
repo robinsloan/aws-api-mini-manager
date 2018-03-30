@@ -2,3 +2,4 @@
 *.DS_Store
 
 aws_config.aml
+Gemfile.lock
